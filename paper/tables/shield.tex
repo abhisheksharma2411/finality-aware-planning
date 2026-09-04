@@ -1,0 +1,22 @@
+\begin{tabular}{llrrrr}
+\toprule
+policy & shield & exact (\%) & mean gap (\$) & paired (\$) & pre-det.\ (\%) \\
+\midrule
+optimistic & none & 65.7 & 163.61 & 253.53 & 66.0 \\
+ & expected & 65.7 & 163.61 & 253.53 & 66.0 \\
+ & downside & 32.1 & 244.29 & 192.20 & 7.0 \\
+\addlinespace
+majority & none & 33.5 & 229.06 & 171.02 & 0.0 \\
+ & expected & 33.5 & 226.85 & 167.84 & 0.0 \\
+ & downside & 29.9 & 243.53 & 181.46 & 0.0 \\
+\addlinespace
+react & none & 54.0 & 128.19 & 116.97 & 0.0 \\
+ & expected & 54.0 & 128.19 & 116.97 & 0.0 \\
+ & downside & 51.8 & 132.68 & 116.97 & 0.0 \\
+\addlinespace
+eager & none & 14.0 & 298.84 & 226.73 & 0.0 \\
+ & expected & 14.0 & 298.84 & 226.73 & 0.0 \\
+ & downside & 14.0 & 298.84 & 226.73 & 0.0 \\
+\addlinespace
+\bottomrule
+\end{tabular}

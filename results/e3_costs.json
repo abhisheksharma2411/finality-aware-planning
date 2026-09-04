@@ -1,0 +1,469 @@
+{
+ "provenance": {
+  "version": "1.0.0",
+  "git_commit": "uncommitted",
+  "git_dirty": "yes",
+  "command": "run_all.py",
+  "python": "3.14.7",
+  "generated_at": "2026-09-04T05:19:55+00:00",
+  "finalitybench_version": "1.0.0",
+  "finalitybench_location": "sibling checkout",
+  "finalitybench_git": "23c8d2e",
+  "experiment": "e3_costs"
+ },
+ "grid": {
+  "cogs_rates": [
+   0.4,
+   0.6,
+   0.8
+  ],
+  "dispute_costs": [
+   1000,
+   2500,
+   5000
+  ],
+  "escalation_costs": [
+   600,
+   1800,
+   3600
+  ]
+ },
+ "n_settings": 27,
+ "planner_better": 27,
+ "gate_better": 0,
+ "indistinguishable": 0,
+ "rows": [
+  {
+   "cogs_rate": 0.4,
+   "dispute_cost": 1000,
+   "escalation_cost": 600,
+   "gate": 4244.102803738318,
+   "planner": 2825.728971962617,
+   "difference": {
+    "point": -1418.3738317757006,
+    "low": -2234.9749216300934,
+    "high": -678.7605177993528,
+    "n_units": 276,
+    "replicates": 800
+   },
+   "planner_better": true,
+   "gate_better": false
+  },
+  {
+   "cogs_rate": 0.4,
+   "dispute_cost": 1000,
+   "escalation_cost": 1800,
+   "gate": 4419.803738317757,
+   "planner": 2825.728971962617,
+   "difference": {
+    "point": -1594.0747663551401,
+    "low": -2457.6624605678235,
+    "high": -813.434375,
+    "n_units": 276,
+    "replicates": 800
+   },
+   "planner_better": true,
+   "gate_better": false
+  },
+  {
+   "cogs_rate": 0.4,
+   "dispute_cost": 1000,
+   "escalation_cost": 3600,
+   "gate": 4683.355140186916,
+   "planner": 2825.728971962617,
+   "difference": {
+    "point": -1857.6261682242994,
+    "low": -2759.4984520123835,
+    "high": -1016.9265175718851,
+    "n_units": 276,
+    "replicates": 800
+   },
+   "planner_better": true,
+   "gate_better": false
+  },
+  {
+   "cogs_rate": 0.4,
+   "dispute_cost": 2500,
+   "escalation_cost": 600,
+   "gate": 4328.214953271028,
+   "planner": 2825.728971962617,
+   "difference": {
+    "point": -1502.4859813084113,
+    "low": -2332.753205128205,
+    "high": -739.019607843137,
+    "n_units": 276,
+    "replicates": 800
+   },
+   "planner_better": true,
+   "gate_better": false
+  },
+  {
+   "cogs_rate": 0.4,
+   "dispute_cost": 2500,
+   "escalation_cost": 1800,
+   "gate": 4503.915887850468,
+   "planner": 2825.728971962617,
+   "difference": {
+    "point": -1678.1869158878508,
+    "low": -2547.5678233438493,
+    "high": -872.3529411764705,
+    "n_units": 276,
+    "replicates": 800
+   },
+   "planner_better": true,
+   "gate_better": false
+  },
+  {
+   "cogs_rate": 0.4,
+   "dispute_cost": 2500,
+   "escalation_cost": 3600,
+   "gate": 4767.467289719626,
+   "planner": 2825.728971962617,
+   "difference": {
+    "point": -1941.738317757009,
+    "low": -2867.859756097561,
+    "high": -1069.6421725239616,
+    "n_units": 276,
+    "replicates": 800
+   },
+   "planner_better": true,
+   "gate_better": false
+  },
+  {
+   "cogs_rate": 0.4,
+   "dispute_cost": 5000,
+   "escalation_cost": 600,
+   "gate": 4468.401869158878,
+   "planner": 2825.728971962617,
+   "difference": {
+    "point": -1642.6728971962611,
+    "low": -2485.422712933754,
+    "high": -843.434375,
+    "n_units": 276,
+    "replicates": 800
+   },
+   "planner_better": true,
+   "gate_better": false
+  },
+  {
+   "cogs_rate": 0.4,
+   "dispute_cost": 5000,
+   "escalation_cost": 1800,
+   "gate": 4644.102803738318,
+   "planner": 2825.728971962617,
+   "difference": {
+    "point": -1818.3738317757006,
+    "low": -2709.6265060240958,
+    "high": -963.5899053627759,
+    "n_units": 276,
+    "replicates": 800
+   },
+   "planner_better": true,
+   "gate_better": false
+  },
+  {
+   "cogs_rate": 0.4,
+   "dispute_cost": 5000,
+   "escalation_cost": 3600,
+   "gate": 4907.654205607477,
+   "planner": 2825.728971962617,
+   "difference": {
+    "point": -2081.92523364486,
+    "low": -3056.7120743034047,
+    "high": -1157.5015974440894,
+    "n_units": 276,
+    "replicates": 800
+   },
+   "planner_better": true,
+   "gate_better": false
+  },
+  {
+   "cogs_rate": 0.6,
+   "dispute_cost": 1000,
+   "escalation_cost": 600,
+   "gate": 2877.3831775700933,
+   "planner": 2789.526479750779,
+   "difference": {
+    "point": -87.85669781931438,
+    "low": -123.88519637462241,
+    "high": -57.55948553054668,
+    "n_units": 276,
+    "replicates": 800
+   },
+   "planner_better": true,
+   "gate_better": false
+  },
+  {
+   "cogs_rate": 0.6,
+   "dispute_cost": 1000,
+   "escalation_cost": 1800,
+   "gate": 3053.0841121495328,
+   "planner": 2789.526479750779,
+   "difference": {
+    "point": -263.55763239875387,
+    "low": -365.89795918367327,
+    "high": -174.30650154798764,
+    "n_units": 276,
+    "replicates": 800
+   },
+   "planner_better": true,
+   "gate_better": false
+  },
+  {
+   "cogs_rate": 0.6,
+   "dispute_cost": 1000,
+   "escalation_cost": 3600,
+   "gate": 3316.6355140186915,
+   "planner": 2789.526479750779,
+   "difference": {
+    "point": -527.1090342679126,
+    "low": -730.5,
+    "high": -350.0,
+    "n_units": 276,
+    "replicates": 800
+   },
+   "planner_better": true,
+   "gate_better": false
+  },
+  {
+   "cogs_rate": 0.6,
+   "dispute_cost": 2500,
+   "escalation_cost": 600,
+   "gate": 2961.495327102804,
+   "planner": 2863.233644859813,
+   "difference": {
+    "point": -98.2616822429909,
+    "low": -146.0750750750749,
+    "high": -60.37267080745323,
+    "n_units": 276,
+    "replicates": 800
+   },
+   "planner_better": true,
+   "gate_better": false
+  },
+  {
+   "cogs_rate": 0.6,
+   "dispute_cost": 2500,
+   "escalation_cost": 1800,
+   "gate": 3137.196261682243,
+   "planner": 2863.233644859813,
+   "difference": {
+    "point": -273.96261682242994,
+    "low": -384.42638036809785,
+    "high": -180.38050314465409,
+    "n_units": 276,
+    "replicates": 800
+   },
+   "planner_better": true,
+   "gate_better": false
+  },
+  {
+   "cogs_rate": 0.6,
+   "dispute_cost": 2500,
+   "escalation_cost": 3600,
+   "gate": 3400.7476635514017,
+   "planner": 2863.233644859813,
+   "difference": {
+    "point": -537.5140186915887,
+    "low": -748.8435582822085,
+    "high": -357.4024767801857,
+    "n_units": 276,
+    "replicates": 800
+   },
+   "planner_better": true,
+   "gate_better": false
+  },
+  {
+   "cogs_rate": 0.6,
+   "dispute_cost": 5000,
+   "escalation_cost": 600,
+   "gate": 3101.6822429906542,
+   "planner": 2980.0560747663553,
+   "difference": {
+    "point": -121.62616822429891,
+    "low": -198.53822629969454,
+    "high": -60.06730769230785,
+    "n_units": 276,
+    "replicates": 800
+   },
+   "planner_better": true,
+   "gate_better": false
+  },
+  {
+   "cogs_rate": 0.6,
+   "dispute_cost": 5000,
+   "escalation_cost": 1800,
+   "gate": 3277.3831775700933,
+   "planner": 2980.0560747663553,
+   "difference": {
+    "point": -297.32710280373794,
+    "low": -428.7670807453419,
+    "high": -186.83544303797453,
+    "n_units": 276,
+    "replicates": 800
+   },
+   "planner_better": true,
+   "gate_better": false
+  },
+  {
+   "cogs_rate": 0.6,
+   "dispute_cost": 5000,
+   "escalation_cost": 3600,
+   "gate": 3540.9345794392525,
+   "planner": 2980.0560747663553,
+   "difference": {
+    "point": -560.8785046728972,
+    "low": -796.2252252252247,
+    "high": -368.6538461538462,
+    "n_units": 276,
+    "replicates": 800
+   },
+   "planner_better": true,
+   "gate_better": false
+  },
+  {
+   "cogs_rate": 0.8,
+   "dispute_cost": 1000,
+   "escalation_cost": 600,
+   "gate": 1510.6542056074766,
+   "planner": 1425.9190031152648,
+   "difference": {
+    "point": -84.73520249221178,
+    "low": -116.61807580174946,
+    "high": -55.9485530546624,
+    "n_units": 276,
+    "replicates": 800
+   },
+   "planner_better": true,
+   "gate_better": false
+  },
+  {
+   "cogs_rate": 0.8,
+   "dispute_cost": 1000,
+   "escalation_cost": 1800,
+   "gate": 1686.3551401869158,
+   "planner": 1425.9190031152648,
+   "difference": {
+    "point": -260.43613707165105,
+    "low": -361.5160349854227,
+    "high": -173.07692307692298,
+    "n_units": 276,
+    "replicates": 800
+   },
+   "planner_better": true,
+   "gate_better": false
+  },
+  {
+   "cogs_rate": 0.8,
+   "dispute_cost": 1000,
+   "escalation_cost": 3600,
+   "gate": 1949.9065420560748,
+   "planner": 1425.9190031152648,
+   "difference": {
+    "point": -523.98753894081,
+    "low": -724.9230769230769,
+    "high": -348.89589905362766,
+    "n_units": 276,
+    "replicates": 800
+   },
+   "planner_better": true,
+   "gate_better": false
+  },
+  {
+   "cogs_rate": 0.8,
+   "dispute_cost": 2500,
+   "escalation_cost": 600,
+   "gate": 1594.766355140187,
+   "planner": 1508.4672897196263,
+   "difference": {
+    "point": -86.29906542056074,
+    "low": -126.74174174174141,
+    "high": -54.545454545454504,
+    "n_units": 276,
+    "replicates": 800
+   },
+   "planner_better": true,
+   "gate_better": false
+  },
+  {
+   "cogs_rate": 0.8,
+   "dispute_cost": 2500,
+   "escalation_cost": 1800,
+   "gate": 1770.4672897196263,
+   "planner": 1508.4672897196263,
+   "difference": {
+    "point": -262.0,
+    "low": -364.0664652567973,
+    "high": -172.26774193548385,
+    "n_units": 276,
+    "replicates": 800
+   },
+   "planner_better": true,
+   "gate_better": false
+  },
+  {
+   "cogs_rate": 0.8,
+   "dispute_cost": 2500,
+   "escalation_cost": 3600,
+   "gate": 2034.018691588785,
+   "planner": 1508.4672897196263,
+   "difference": {
+    "point": -525.5514018691588,
+    "low": -728.8717201166182,
+    "high": -348.4006410256411,
+    "n_units": 276,
+    "replicates": 800
+   },
+   "planner_better": true,
+   "gate_better": false
+  },
+  {
+   "cogs_rate": 0.8,
+   "dispute_cost": 5000,
+   "escalation_cost": 600,
+   "gate": 1734.9532710280373,
+   "planner": 1639.2461059190032,
+   "difference": {
+    "point": -95.70716510903412,
+    "low": -159.4776119402984,
+    "high": -45.84905660377353,
+    "n_units": 276,
+    "replicates": 800
+   },
+   "planner_better": true,
+   "gate_better": false
+  },
+  {
+   "cogs_rate": 0.8,
+   "dispute_cost": 5000,
+   "escalation_cost": 1800,
+   "gate": 1910.6542056074766,
+   "planner": 1639.2461059190032,
+   "difference": {
+    "point": -271.4080996884734,
+    "low": -392.20121951219517,
+    "high": -174.5891719745223,
+    "n_units": 276,
+    "replicates": 800
+   },
+   "planner_better": true,
+   "gate_better": false
+  },
+  {
+   "cogs_rate": 0.8,
+   "dispute_cost": 5000,
+   "escalation_cost": 3600,
+   "gate": 2174.2056074766356,
+   "planner": 1639.2461059190032,
+   "difference": {
+    "point": -534.9595015576324,
+    "low": -756.9320987654323,
+    "high": -347.3248407643314,
+    "n_units": 276,
+    "replicates": 800
+   },
+   "planner_better": true,
+   "gate_better": false
+  }
+ ]
+}

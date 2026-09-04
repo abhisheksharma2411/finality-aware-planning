@@ -1,0 +1,204 @@
+{
+ "provenance": {
+  "version": "1.0.0",
+  "git_commit": "uncommitted",
+  "git_dirty": "yes",
+  "command": "run_all.py",
+  "python": "3.14.7",
+  "generated_at": "2026-09-04T05:20:01+00:00",
+  "finalitybench_version": "1.0.0",
+  "finalitybench_location": "sibling checkout",
+  "finalitybench_git": "23c8d2e",
+  "experiment": "e4_transfer"
+ },
+ "public": {
+  "split": "public",
+  "master_seed": 20260902,
+  "n_tasks": 321,
+  "n_pairs": 45,
+  "unpaired_discarded": 0,
+  "archetype_counts": {
+   "duplicate_settlement": 38,
+   "late_chargeback": 13,
+   "lost_settlement": 45,
+   "partial_ledger": 32,
+   "pending_fail": 45,
+   "pending_fail_hard": 26,
+   "pending_settle": 58,
+   "stale_processor": 26,
+   "unresolvable": 38
+  },
+  "outcome_counts": {
+   "fail": 90,
+   "settle": 231
+  },
+  "resolvable": 283,
+  "pair_reseed_mean": 1.0,
+  "pair_reseed_max": 1,
+  "fingerprint": "35c002b563fc9c8f"
+ },
+ "hidden": {
+  "split": "hidden",
+  "master_seed": 71041983,
+  "n_tasks": 321,
+  "n_pairs": 45,
+  "unpaired_discarded": 0,
+  "archetype_counts": {
+   "duplicate_settlement": 38,
+   "late_chargeback": 13,
+   "lost_settlement": 45,
+   "partial_ledger": 32,
+   "pending_fail": 45,
+   "pending_fail_hard": 26,
+   "pending_settle": 58,
+   "stale_processor": 26,
+   "unresolvable": 38
+  },
+  "outcome_counts": {
+   "fail": 90,
+   "settle": 231
+  },
+  "resolvable": 283,
+  "pair_reseed_mean": 1.0,
+  "pair_reseed_max": 1,
+  "fingerprint": "7441799200633902"
+ },
+ "priors": {
+  "public": {
+   "n": 321,
+   "settle_rate": 0.719626168224299,
+   "source": "public:35c002b563fc9c8f",
+   "settle_rate_after": {
+    "0": 0.72,
+    "300": 0.687,
+    "500": 0.61,
+    "600": 0.5,
+    "700": 0.5
+   },
+   "quantiles": {
+    "0.1": 193,
+    "0.25": 265,
+    "0.5": 394,
+    "0.75": 497,
+    "0.9": 917
+   }
+  },
+  "hidden": {
+   "n": 321,
+   "settle_rate": 0.719626168224299,
+   "source": "hidden:7441799200633902",
+   "settle_rate_after": {
+    "0": 0.72,
+    "300": 0.692,
+    "500": 0.637,
+    "600": 0.5,
+    "700": 0.5
+   },
+   "quantiles": {
+    "0.1": 203,
+    "0.25": 279,
+    "0.5": 402,
+    "0.75": 511,
+    "0.9": 762
+   }
+  }
+ },
+ "rows": [
+  {
+   "split": "public",
+   "prior": "fitted on public",
+   "prior_source": "public:35c002b563fc9c8f",
+   "gate": 3137.196261682243,
+   "planner": 2863.233644859813,
+   "planner_exact": 0.9190031152647975,
+   "difference": {
+    "point": -273.96261682242994,
+    "low": -382.25609756097583,
+    "high": -178.01286173633434,
+    "n_units": 276,
+    "replicates": 1500
+   },
+   "planner_better": true
+  },
+  {
+   "split": "public",
+   "prior": "fitted on this split",
+   "prior_source": "public:35c002b563fc9c8f",
+   "gate": 3137.196261682243,
+   "planner": 2863.233644859813,
+   "planner_exact": 0.9190031152647975,
+   "difference": {
+    "point": -273.96261682242994,
+    "low": -382.25609756097583,
+    "high": -178.01286173633434,
+    "n_units": 276,
+    "replicates": 1500
+   },
+   "planner_better": true
+  },
+  {
+   "split": "public",
+   "prior": "deliberately wrong",
+   "prior_source": "deliberately wrong",
+   "gate": 3137.196261682243,
+   "planner": 15303.8753894081,
+   "planner_exact": 0.7632398753894081,
+   "difference": {
+    "point": 12166.679127725856,
+    "low": 8156.679365079365,
+    "high": 16928.140186915887,
+    "n_units": 276,
+    "replicates": 1500
+   },
+   "planner_better": false
+  },
+  {
+   "split": "hidden",
+   "prior": "fitted on public",
+   "prior_source": "public:35c002b563fc9c8f",
+   "gate": 3521.8068535825546,
+   "planner": 3254.822429906542,
+   "planner_exact": 0.9221183800623053,
+   "difference": {
+    "point": -266.98442367601274,
+    "low": -366.9577039274918,
+    "high": -174.88524590163934,
+    "n_units": 276,
+    "replicates": 1500
+   },
+   "planner_better": true
+  },
+  {
+   "split": "hidden",
+   "prior": "fitted on this split",
+   "prior_source": "hidden:7441799200633902",
+   "gate": 3521.8068535825546,
+   "planner": 3254.822429906542,
+   "planner_exact": 0.9221183800623053,
+   "difference": {
+    "point": -266.98442367601274,
+    "low": -366.9577039274918,
+    "high": -174.88524590163934,
+    "n_units": 276,
+    "replicates": 1500
+   },
+   "planner_better": true
+  },
+  {
+   "split": "hidden",
+   "prior": "deliberately wrong",
+   "prior_source": "deliberately wrong",
+   "gate": 3521.8068535825546,
+   "planner": 20121.6230529595,
+   "planner_exact": 0.7601246105919003,
+   "difference": {
+    "point": 16599.816199376946,
+    "low": 11218.47987616099,
+    "high": 22447.58359621451,
+    "n_units": 276,
+    "replicates": 1500
+   },
+   "planner_better": false
+  }
+ ]
+}

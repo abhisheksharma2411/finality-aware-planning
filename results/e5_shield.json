@@ -1,0 +1,150 @@
+{
+ "provenance": {
+  "version": "1.0.0",
+  "git_commit": "uncommitted",
+  "git_dirty": "yes",
+  "command": "run_all.py",
+  "python": "3.14.7",
+  "generated_at": "2026-09-04T05:20:04+00:00",
+  "finalitybench_version": "1.0.0",
+  "finalitybench_location": "sibling checkout",
+  "finalitybench_git": "23c8d2e",
+  "experiment": "e5_shield"
+ },
+ "corpus": {
+  "split": "public",
+  "master_seed": 20260902,
+  "n_tasks": 321,
+  "n_pairs": 45,
+  "unpaired_discarded": 0,
+  "archetype_counts": {
+   "duplicate_settlement": 38,
+   "late_chargeback": 13,
+   "lost_settlement": 45,
+   "partial_ledger": 32,
+   "pending_fail": 45,
+   "pending_fail_hard": 26,
+   "pending_settle": 58,
+   "stale_processor": 26,
+   "unresolvable": 38
+  },
+  "outcome_counts": {
+   "fail": 90,
+   "settle": 231
+  },
+  "resolvable": 283,
+  "pair_reseed_mean": 1.0,
+  "pair_reseed_max": 1,
+  "fingerprint": "35c002b563fc9c8f"
+ },
+ "rows": [
+  {
+   "policy": "optimistic",
+   "exact_rate": 0.6566978193146418,
+   "mean_excess": 16360.86417445483,
+   "paired": 25353.222222222223,
+   "premature_rate": 0.660436137071651,
+   "blocks": 0,
+   "redirects": 0
+  },
+  {
+   "policy": "optimistic+expected",
+   "exact_rate": 0.6566978193146418,
+   "mean_excess": 16360.86417445483,
+   "paired": 25353.222222222223,
+   "premature_rate": 0.660436137071651,
+   "blocks": 0,
+   "redirects": 0
+  },
+  {
+   "policy": "optimistic+downside",
+   "exact_rate": 0.32149532710280376,
+   "mean_excess": 24428.81433021807,
+   "paired": 19220.11111111111,
+   "premature_rate": 0.07040498442367601,
+   "blocks": 2100,
+   "redirects": 1
+  },
+  {
+   "policy": "eager",
+   "exact_rate": 0.14018691588785046,
+   "mean_excess": 29883.90031152648,
+   "paired": 22673.11111111111,
+   "premature_rate": 0.0,
+   "blocks": 0,
+   "redirects": 0
+  },
+  {
+   "policy": "eager+expected",
+   "exact_rate": 0.14018691588785046,
+   "mean_excess": 29883.90031152648,
+   "paired": 22673.11111111111,
+   "premature_rate": 0.0,
+   "blocks": 0,
+   "redirects": 0
+  },
+  {
+   "policy": "eager+downside",
+   "exact_rate": 0.14018691588785046,
+   "mean_excess": 29883.90031152648,
+   "paired": 22673.11111111111,
+   "premature_rate": 0.0,
+   "blocks": 0,
+   "redirects": 0
+  },
+  {
+   "policy": "majority",
+   "exact_rate": 0.33457943925233646,
+   "mean_excess": 22905.84174454829,
+   "paired": 17102.044444444444,
+   "premature_rate": 0.0,
+   "blocks": 0,
+   "redirects": 0
+  },
+  {
+   "policy": "majority+expected",
+   "exact_rate": 0.33457943925233646,
+   "mean_excess": 22684.564485981307,
+   "paired": 16784.48888888889,
+   "premature_rate": 0.0,
+   "blocks": 55,
+   "redirects": 0
+  },
+  {
+   "policy": "majority+downside",
+   "exact_rate": 0.29906542056074764,
+   "mean_excess": 24353.48660436137,
+   "paired": 18145.777777777777,
+   "premature_rate": 0.0,
+   "blocks": 349,
+   "redirects": 0
+  },
+  {
+   "policy": "react",
+   "exact_rate": 0.5395638629283489,
+   "mean_excess": 12818.591900311527,
+   "paired": 11697.155555555555,
+   "premature_rate": 0.0,
+   "blocks": 0,
+   "redirects": 0
+  },
+  {
+   "policy": "react+expected",
+   "exact_rate": 0.5395638629283489,
+   "mean_excess": 12818.591900311527,
+   "paired": 11697.155555555555,
+   "premature_rate": 0.0,
+   "blocks": 0,
+   "redirects": 0
+  },
+  {
+   "policy": "react+downside",
+   "exact_rate": 0.5177570093457944,
+   "mean_excess": 13268.41121495327,
+   "paired": 11697.155555555555,
+   "premature_rate": 0.0,
+   "blocks": 753,
+   "redirects": 1
+  }
+ ]
+}

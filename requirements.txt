@@ -1,0 +1,4 @@
+# The planner uses only the standard library plus FinalityBench, which make
+# setup fetches. These are for the tests and the figures.
+pytest>=8.3,<10
+matplotlib>=3.9,<4

@@ -1,0 +1,21 @@
+{
+ "provenance": {
+  "version": "1.0.0",
+  "git_commit": "uncommitted",
+  "git_dirty": "yes",
+  "command": "run_all.py",
+  "python": "3.14.7",
+  "generated_at": "2026-09-04T05:20:04+00:00",
+  "finalitybench_version": "1.0.0",
+  "finalitybench_location": "sibling checkout",
+  "finalitybench_git": "23c8d2e",
+  "experiment": "run_all"
+ },
+ "timings_seconds": {
+  "e1_main": 33.54,
+  "e2_ablation": 9.0,
+  "e3_costs": 21.82,
+  "e4_transfer": 6.73,
+  "e5_shield": 2.96
+ }
+}

@@ -1,0 +1,32 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it as below."
+title: "Finality-aware planning: deciding under uncertain payment finality"
+abstract: "A planning policy over the FinalityBench environment that replaces a fixed escalate-to-a-human rule with an expected-value comparison over the dispositions available when a payment capture will not resolve before the order's ship-by deadline. Includes a belief over resolution time fitted from the benchmark's public split, a safety shield with expected-value and downside criteria, and the finding that an expected-value shield cannot refuse a gamble that is profitable in expectation."
+type: software
+authors:
+  - family-names: Sharma
+    given-names: Abhishek
+    email: abhicse24@gmail.com
+    orcid: "https://orcid.org/0009-0007-1103-2103"
+    affiliation: "IEEE Senior Member"
+version: 1.0.0
+date-released: 2026-09-03
+license: MIT
+repository-code: "https://github.com/abhisheksharma2411/finality-aware-planning"
+url: "https://abhisharma.co.in"
+keywords:
+  - planning under partial observability
+  - value of information
+  - safety shields
+  - irreversible actions
+  - payment systems
+  - risk-sensitive decision making
+references:
+  - type: software
+    title: "FinalityBench: an effect-level benchmark for agent decisions under delayed and conflicting financial finality"
+    authors:
+      - family-names: Sharma
+        given-names: Abhishek
+        orcid: "https://orcid.org/0009-0007-1103-2103"
+    doi: 10.5281/zenodo.22262591
+    year: 2026
