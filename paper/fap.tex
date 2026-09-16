@@ -21,36 +21,35 @@
 
 \begin{abstract}
 When a merchant's payment capture will not resolve before the order's ship-by
-date, an agent has to choose without knowing. The strongest policy shipped with
-the FinalityBench benchmark handles this by escalating to a human, which is
-safe and, on that corpus, never the best available action: escalation costs a
-flat fee on every case while the alternatives cost something that depends on the
-order. We replace the fixed rule with an expected-value comparison under a belief
-fitted from the benchmark's public split, and evaluate on \nTasks{} tasks and
-\nGrades{} graded episodes. What that amounts to is worth stating plainly,
-since ``planner'' invites more: a conditional probability, and one comparison
-of four closed-form expressions taken at the deadline. It is a deadline
-decision rule, not a general sequential planner, and nothing below searches
-over action sequences. The planner reaches \planExact\%\ exactly
-correct against the gate's \gateExact\%, and on a resample that gives both
-policies the same tasks its mean position gap is \$\vsGateGap{} lower, an
-interval that excludes zero and amounts to a nine per cent reduction. A sensitivity sweep over \costSettings{} settings of the three cost constants
-the benchmark stipulates leaves the ordering unchanged; those settings reuse
-the same tasks, generator and seeds, so they are one experiment varied rather
-than \costSettings{} confirmations. The advantage also survives evaluation on
-a regenerated corpus the belief was not fitted to.
-An ablation is less flattering: of four components, two contribute nothing.
-Removing the safety shield costs \$\ablShield{} and removing the
-value-of-information rule costs \$\ablVoi. The shield is inert because the
-planner already maximises expected value, and pursuing why produced the more
-interesting result. At the settle rate this corpus exhibits, shipping without
-checking is a bet that pays, so an expected-value shield cannot object to it. A
-shield that reasons about the branch it cannot rule out does object, and cuts a
-ship-on-first-sign policy's pre-determination irreversible actions from
-\optPrem\%\ to \optShieldPrem\%\ while making it worse on the corpus's own
-outcome distribution. Which of those an operator wants is a question about risk
-preference that the benchmark's paired scoring answers one way and its natural
-distribution answers the other.
+date, an agent has to choose without knowing. FinalityBench's strongest policy
+escalates to a human, which is safe and, on that corpus, never the best
+available action: escalation costs a flat fee on every case while the
+alternatives cost something that depends on the order.
+
+We replace the fixed rule with an expected-value comparison under a belief
+fitted from the benchmark's public split. It is a deadline decision rule, not a
+general sequential planner: a conditional probability and one comparison of
+four closed-form expressions, with no search over action sequences. Over
+\nTasks{} tasks and \nGrades{} graded episodes it is exactly correct on
+\planExact\%\ against the gate's \gateExact\%, and its mean position gap on a
+paired resample is \$\vsGateGap{} lower.
+
+The margin turns on what escalation is worth, not only on what it costs.
+FinalityBench's analyst starts no new money movement, so escalation cannot
+rescue a capture that never settles. Re-scoring every episode under more
+capable analysts shrinks the gap from \$\escBaselineGap{} to \$\escFullGap{}
+without changing its sign: only \escRescuable{} of the gate's
+\escEscalations{} escalations are on cases a retry could rescue. A sweep over
+\costSettings{} cost settings reuses the same tasks and seeds, so it varies one
+experiment rather than confirming the result \costSettings{} times.
+
+Two of four components contribute nothing. The safety shield is inert because
+the decision rule already maximises expected value, and pursuing why gave the
+more transferable result: an expected-value shield cannot object to shipping
+without checking, because at this settle rate that bet pays, while a shield
+reasoning about the branch it cannot rule out cuts a ship-on-first-sign
+policy's pre-determination irreversible actions from \optPrem\%\ to
+\optShieldPrem\%\ and is worse on the corpus's own outcome distribution.
 \end{abstract}
 
 \begin{IEEEkeywords}
