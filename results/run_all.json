@@ -1,24 +1,24 @@
 {
  "provenance": {
   "version": "1.0.0",
-  "git_commit": "c97b4291c72fb054fe91a075bd4863ffef994178",
+  "git_commit": "97c356c1e0e3c9bba80e7f383bb81374d5a395b8",
   "git_dirty": "no",
   "command": "run_all.py",
   "python": "3.14.7",
-  "generated_at": "2026-09-16T01:50:51+00:00",
+  "generated_at": "2026-09-16T02:10:08+00:00",
   "finalitybench_version": "1.0.0",
   "finalitybench_location": "sibling checkout",
   "finalitybench_git": "0b01661",
   "experiment": "run_all"
  },
  "timings_seconds": {
-  "e1_main": 34.56,
-  "e2_ablation": 8.91,
-  "e3_costs": 21.98,
-  "e4_transfer": 6.83,
-  "e5_shield": 2.87,
+  "e1_main": 34.96,
+  "e2_ablation": 9.03,
+  "e3_costs": 21.97,
+  "e4_transfer": 6.65,
+  "e5_shield": 2.84,
   "e6_worked_example": 0.04,
-  "e6_premature": 0.5,
-  "e7_escalation": 0.48
+  "e6_premature": 0.47,
+  "e7_escalation": 0.47
  }
 }
