@@ -1,14 +1,14 @@
 {
  "provenance": {
   "version": "1.0.0",
-  "git_commit": "a31781daf213c105e254d593b0e4ba133ee3550d",
+  "git_commit": "c97b4291c72fb054fe91a075bd4863ffef994178",
   "git_dirty": "no",
   "command": "run_all.py",
   "python": "3.14.7",
-  "generated_at": "2026-09-04T05:21:25+00:00",
+  "generated_at": "2026-09-16T01:50:09+00:00",
   "finalitybench_version": "1.0.0",
   "finalitybench_location": "sibling checkout",
-  "finalitybench_git": "23c8d2e",
+  "finalitybench_git": "0b01661",
   "experiment": "e1_main"
  },
  "corpus": {
