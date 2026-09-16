@@ -1,0 +1,52 @@
+{
+ "provenance": {
+  "version": "1.0.0",
+  "git_commit": "823cfd46df1cd944e804dbb340d65df5804be555",
+  "git_dirty": "yes",
+  "command": "experiments/e6_worked_example.py",
+  "python": "3.14.7",
+  "generated_at": "2026-09-16T00:07:24+00:00",
+  "finalitybench_version": "1.0.0",
+  "finalitybench_location": "sibling checkout",
+  "finalitybench_git": "ea5c643"
+ },
+ "config": {
+  "large_cents": 29900,
+  "small_cents": 2499,
+  "p_settle": 0.5,
+  "p_settles_late": 0.0,
+  "dispute_cost_cents": 2500,
+  "escalation_cost_cents": 1800,
+  "cogs_rate": 0.6
+ },
+ "large": {
+  "amount": 299.0,
+  "values": {
+   "ship": -29.9,
+   "close": -12.5,
+   "escalate": -18.0,
+   "refund": -149.5
+  },
+  "chooses": "close",
+  "cogs": 179.4,
+  "saved_over_escalating": 5.5
+ },
+ "small": {
+  "amount": 24.99,
+  "values": {
+   "ship": -2.5,
+   "close": -12.5,
+   "escalate": -18.0,
+   "refund": -12.49
+  },
+  "chooses": "ship",
+  "cogs": 14.99,
+  "saved_over_escalating": 15.5
+ },
+ "headline": {
+  "the_large_order_is_closed": true,
+  "the_small_order_is_shipped": true,
+  "the_gate_escalates_either_way_for": 18.0,
+  "note": "the two orders differ only in value, and the planner's choice flips while the gate's does not -- which is the paragraph's point"
+ }
+}

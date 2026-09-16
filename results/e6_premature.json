@@ -1,0 +1,110 @@
+{
+ "provenance": {
+  "version": "1.0.0",
+  "git_commit": "823cfd46df1cd944e804dbb340d65df5804be555",
+  "git_dirty": "yes",
+  "command": "experiments/e6_premature.py",
+  "python": "3.14.7",
+  "generated_at": "2026-09-16T00:10:48+00:00",
+  "finalitybench_version": "1.0.0",
+  "finalitybench_location": "sibling checkout",
+  "finalitybench_git": "ea5c643"
+ },
+ "config": {
+  "n_tasks": 320,
+  "seeds": [
+   0,
+   1,
+   2,
+   3,
+   4
+  ],
+  "arms": [
+   "planner",
+   "planner_ships_on_submission"
+  ]
+ },
+ "per_archetype": [
+  {
+   "archetype": "duplicate_settlement",
+   "n": 190,
+   "current_mean_excess": 0.0,
+   "earlier_mean_excess": 0.0,
+   "cost_per_case": 0.0
+  },
+  {
+   "archetype": "late_chargeback",
+   "n": 65,
+   "current_mean_excess": 0.0,
+   "earlier_mean_excess": 0.0,
+   "cost_per_case": 0.0
+  },
+  {
+   "archetype": "lost_settlement",
+   "n": 225,
+   "current_mean_excess": 0.0,
+   "earlier_mean_excess": 0.0,
+   "cost_per_case": 0.0
+  },
+  {
+   "archetype": "partial_ledger",
+   "n": 160,
+   "current_mean_excess": 0.0,
+   "earlier_mean_excess": 0.0,
+   "cost_per_case": 0.0
+  },
+  {
+   "archetype": "pending_fail",
+   "n": 225,
+   "current_mean_excess": 1316.4444444444443,
+   "earlier_mean_excess": 1316.4444444444443,
+   "cost_per_case": 0.0
+  },
+  {
+   "archetype": "pending_fail_hard",
+   "n": 130,
+   "current_mean_excess": 0.0,
+   "earlier_mean_excess": 59304.192307692305,
+   "cost_per_case": 59304.192307692305
+  },
+  {
+   "archetype": "pending_settle",
+   "n": 290,
+   "current_mean_excess": 0.0,
+   "earlier_mean_excess": 0.0,
+   "cost_per_case": 0.0
+  },
+  {
+   "archetype": "stale_processor",
+   "n": 130,
+   "current_mean_excess": 0.0,
+   "earlier_mean_excess": 0.0,
+   "cost_per_case": 0.0
+  },
+  {
+   "archetype": "unresolvable",
+   "n": 190,
+   "current_mean_excess": 22627.842105263157,
+   "earlier_mean_excess": 22627.842105263157,
+   "cost_per_case": 0.0
+  }
+ ],
+ "headline": {
+  "current": {
+   "exact_rate": 0.9190031152647975,
+   "mean_excess": 2863.233644859813,
+   "premature_rate": 0.024922118380062305
+  },
+  "earlier": {
+   "exact_rate": 0.8442367601246106,
+   "mean_excess": 7666.688473520249,
+   "premature_rate": 0.024922118380062305
+  },
+  "worst_archetype": "pending_fail_hard",
+  "cost_per_case_cents": 59304.192307692305,
+  "cost_per_case_dollars": 593.04,
+  "premature_rate_increase": 0.0,
+  "flagged_premature": false,
+  "note": "the loss is real and the premature flag does not move. FinalityBench sets that flag when the agent ships while the *original* capture reference is undetermined, and on these archetypes the original has already failed by the time a replacement is submitted. Shipping against an unsettled replacement is the same mistake against a different reference, and the flag does not see it -- so the cost appears in excess loss alone. Recorded here because the paper previously described this as the premature action the benchmark detects, and the benchmark does not detect it."
+ }
+}

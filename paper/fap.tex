@@ -221,10 +221,20 @@ gate escalates unconditionally where this prices the options.}
 Everything else the planner does matches the gate: probe, wait while the
 deadline allows, retry a failed capture under the original key, and verify the
 replacement before shipping it. The last of those is not incidental. An earlier
-version shipped as soon as a replacement was submitted, which gave away the cost
-of goods on every unrecoverable failure and cost \$640 per such case. That is
-the premature action the benchmark exists to detect, committed by a policy
-written to avoid it.
+version shipped as soon as a replacement was submitted, which gives away the
+cost of goods whenever the replacement does not settle. Reconstructing that
+version and running both costs \$\prematureCost{} per case on
+\texttt{\prematureArchetype}, and takes exact resolution from
+\prematureExactAfter\%\ to \prematureExactBefore\%.
+
+It is worth saying what does \emph{not} happen. FinalityBench's premature flag
+does not move at all, because it fires when an agent ships while the
+\emph{original} capture reference is undetermined, and on this archetype the
+original has already failed by the time a replacement exists. Shipping against
+an unsettled replacement is the same mistake against a different reference and
+the flag cannot see it, so the cost shows up in excess loss alone. An earlier
+draft of this paragraph called it the premature action the benchmark detects,
+which it is not.
 
 \section{Results}
 \label{sec:results}
@@ -273,27 +283,29 @@ says more about those baselines than about this planner.
 
 \subsection{One case, end to end}
 
-Take an order of \$299.00 whose capture resolves at $t=720$, past a ship-by
+Take an order of \$\exBigAmount{} whose capture resolves at $t=720$, past a ship-by
 deadline of $t=600$. Both policies probe at intervals and both learn nothing,
 because there is nothing yet to learn.
 
 At $t=545$ the gate has about a minute of deadline left, no terminal status,
 and a rule that says escalate. It escalates. An analyst picks the case up two
 hundred ticks after the deadline, finds the money has arrived for an order that
-can no longer ship, and returns it. The merchant is out the \$18.00 handling
-cost.
+can no longer ship, and returns it. The merchant is out the \$\exEscalate{}
+handling cost.
 
 The planner reaches the same instant with the same information and computes
-four numbers. Shipping is worth $0.5 \times 299 - 179.40 = -\$29.90$, since the
-goods can still go out but the capture is a coin flip. Closing is worth
-$-0.5 \times 25 = -\$12.50$, the dispute that follows when money arrives for an
-unfulfilled order. Escalating is worth $-\$18.00$ plus the dispute it does not
-avoid. Refunding is worth $-\$149.50$, since half the time there is nothing to
-refund. It closes, and saves \$5.50.
+four numbers. Shipping is worth $0.5 \times \exBigAmount{} - \exBigCogs{} =
+-\$\exBigShip{}$, since the goods can still go out but the capture is a coin
+flip. Closing is worth $-\$\exBigClose{}$, the dispute that follows when money
+arrives for an unfulfilled order. Escalating is worth $-\$\exEscalate{}$ plus
+the dispute it does not avoid. Refunding is worth $-\$\exBigRefund{}$, since
+half the time there is nothing to refund. It closes, and saves
+\$\exBigSaved{}.
 
-On a \$24.99 order the same computation gives a different answer: shipping is
-worth $-\$2.49$ against closing's $-\$12.50$, so it ships and accepts the risk.
-The gate escalates in both cases for \$18.00.
+On a \$\exSmallAmount{} order the same computation gives a different answer:
+shipping is worth $-\$\exSmallShip{}$ against closing's $-\$\exSmallClose{}$, so
+it ships and accepts the risk. The gate escalates in both cases for
+\$\exEscalate{}.
 
 \subsection{Where the margin comes from}
 

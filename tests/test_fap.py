@@ -177,3 +177,59 @@ def test_a_wrong_prior_makes_the_planner_worse(corpus):
     bad_planner.name = "bad"
     b = evaluate([bad_planner], subset, profile=FaultProfile(), seeds=(0,))
     assert summarize(b, "bad").mean_excess > summarize(g, "planner").mean_excess
+
+
+def test_verifying_the_replacement_is_worth_what_the_paper_says():
+    """The design decision the paper defends, as a test.
+
+    If shipping on submission ever stopped costing anything, the verification
+    step would be unnecessary and the paragraph defending it would be wrong.
+    """
+    import sys
+    from pathlib import Path
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "experiments"))
+    from e6_premature import ShipsOnSubmission
+
+    from fap.belief import FinalityPrior
+    from fap.planner import FinalityAwarePlanner
+    from finalitybench.faults import FaultProfile
+    from finalitybench.runner import evaluate, summarize
+    from finalitybench.tasks import build_corpus
+
+    corpus = build_corpus(n_tasks=80)
+    prior = FinalityPrior.fit(corpus)
+    current, earlier = FinalityAwarePlanner(prior), ShipsOnSubmission(prior)
+    earlier.name = ShipsOnSubmission.name
+    grades = evaluate([current, earlier], corpus, profile=FaultProfile(),
+                      seeds=(0,))
+    assert (summarize(grades, earlier.name).mean_excess
+            > summarize(grades, current.name).mean_excess)
+
+
+def test_the_premature_flag_does_not_see_a_replacement():
+    """The limitation the paper now states, asserted rather than described.
+
+    FinalityBench flags shipping while the original capture is undetermined.
+    Shipping against an unsettled replacement is the same mistake against a
+    different reference, and if that ever starts being flagged, the paragraph
+    saying it is not needs removing.
+    """
+    import sys
+    from pathlib import Path
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "experiments"))
+    from e6_premature import ShipsOnSubmission
+
+    from fap.belief import FinalityPrior
+    from fap.planner import FinalityAwarePlanner
+    from finalitybench.faults import FaultProfile
+    from finalitybench.runner import evaluate, summarize
+    from finalitybench.tasks import build_corpus
+
+    corpus = build_corpus(n_tasks=80)
+    prior = FinalityPrior.fit(corpus)
+    current, earlier = FinalityAwarePlanner(prior), ShipsOnSubmission(prior)
+    earlier.name = ShipsOnSubmission.name
+    grades = evaluate([current, earlier], corpus, profile=FaultProfile(),
+                      seeds=(0,))
+    assert (summarize(grades, earlier.name).premature_rate
+            == summarize(grades, current.name).premature_rate)
