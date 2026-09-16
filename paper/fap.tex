@@ -11,7 +11,7 @@
 
 \begin{document}
 
-\title{Deciding Under Uncertain Payment Finality:\\A Planner That Prices Its Options}
+\title{Deciding Under Uncertain Payment Finality:\\A Decision Rule That Prices Its Options}
 
 \author{\IEEEauthorblockN{Abhishek Sharma}
 \IEEEauthorblockA{Senior Member, IEEE\\
@@ -25,14 +25,20 @@ date, an agent has to choose without knowing. The strongest policy shipped with
 the FinalityBench benchmark handles this by escalating to a human, which is
 safe and, on that corpus, never the best available action: escalation costs a
 flat fee on every case while the alternatives cost something that depends on the
-order. We replace the fixed rule with an expected-value comparison under a
-belief fitted from the benchmark's public split, and evaluate on \nTasks{} tasks
-and \nGrades{} graded episodes. The planner reaches \planExact\%\ exactly
+order. We replace the fixed rule with an expected-value comparison under a belief
+fitted from the benchmark's public split, and evaluate on \nTasks{} tasks and
+\nGrades{} graded episodes. What that amounts to is worth stating plainly,
+since ``planner'' invites more: a conditional probability, and one comparison
+of four closed-form expressions taken at the deadline. It is a deadline
+decision rule, not a general sequential planner, and nothing below searches
+over action sequences. The planner reaches \planExact\%\ exactly
 correct against the gate's \gateExact\%, and on a resample that gives both
 policies the same tasks its mean position gap is \$\vsGateGap{} lower, an
-interval that excludes zero and amounts to a nine per cent reduction. The advantage survives every one of
-\costSettings{} settings of the three cost constants the benchmark stipulates,
-and it survives evaluation on a regenerated corpus the belief was not fitted to.
+interval that excludes zero and amounts to a nine per cent reduction. A sensitivity sweep over \costSettings{} settings of the three cost constants
+the benchmark stipulates leaves the ordering unchanged; those settings reuse
+the same tasks, generator and seeds, so they are one experiment varied rather
+than \costSettings{} confirmations. The advantage also survives evaluation on
+a regenerated corpus the belief was not fitted to.
 An ablation is less flattering: of four components, two contribute nothing.
 Removing the safety shield costs \$\ablShield{} and removing the
 value-of-information rule costs \$\ablVoi. The shield is inert because the
@@ -481,14 +487,37 @@ shield is inert is itself a result, but a reader should understand the working
 parts as the decision rule and the conditional prior.
 
 \textbf{The margin depends on how an escalation is modelled, not only on what
-it costs.} Of the \$\vsGateGap{} total, \$2.23 comes from the archetype where
-the gate escalates. FinalityBench models an escalated case as an analyst who
-completes the disposition of money already held and does not initiate new money
-movement. Under that model escalation is worth little, so declining to escalate
-is worth something. An analyst who also re-attempted failed captures would make
-escalation more valuable and could remove the margin. The cost sweep varies the
-price of escalation and not its effect, and the second is the assumption that
-carries more weight.
+it costs.} Of the \$\vsGateGap{} total, \$\escalatingContribution{} comes from
+the \texttt{\escalatingArchetype} archetype, where the gate escalates.
+FinalityBench models an escalated case as an analyst who completes the
+disposition of money already held and does not initiate new money movement.
+Under that model escalation cannot rescue a capture that never settles, so
+declining to escalate is nearly free. The cost sweep varies the price of
+escalation and not its effect, and the second assumption carries more weight,
+so we measured it.
+
+\begin{table}[t] \centering \caption{Mean position gap over the finality gate
+as the analyst becomes more capable. \texttt{retry} is the probability that an
+escalated case whose capture could have been re-attempted successfully is
+rescued. The first row is FinalityBench's own analyst.} \label{tab:escalation}
+\footnotesize \input{tables/escalation} \end{table}
+
+Every graded episode is re-scored under an analyst of a stated capability,
+computed after the fact from the log and the case's own retry flag, so the
+benchmark is not modified and its published numbers are the \texttt{retry}
+$=0$ row. Table~\ref{tab:escalation} gives the sweep. The gap falls from
+\$\escBaselineGap{} to \$\escFullGap{} as the analyst goes from never re-
+attempting to always succeeding where a retry could work, which is
+\escShrink\% of the margin. It does not change sign at any capability.
+
+So both halves of the concern are answered and only one of them favours us.
+The margin really is mostly an artifact of what escalation is worth: two
+thirds of it disappears against a maximally capable analyst. The ordering is
+not: even that analyst leaves the decision rule ahead, because only
+\escRescuable{} of the gate's \escEscalations{} escalations
+(\escRescuablePct\%) are on cases a retry could have rescued at all. An
+analyst with capabilities this model does not represent, one who contacts the
+customer or extends the ship-by date, is outside what we can say.
 
 \textbf{The cost settings are correlated.} The \costSettings{} combinations
 reuse one corpus generator, one task draw and one set of fault seeds. They show
@@ -533,8 +562,7 @@ branch it cannot rule out will.
 \section*{Artifact availability}
 
 Code, the fitted priors and every result file are at
-\url{https://github.com/abhisheksharma2411/finality-aware-planning}, archived at
-\textsc{doi} \texttt{ZENODO\_DOI\_PLACEHOLDER}. It consumes the released
+\url{https://github.com/abhisheksharma2411/finality-aware-planning}. An archival DOI is forthcoming. It consumes the released
 FinalityBench artifact~\cite{finalitybench} rather than reimplementing it.
 \texttt{make reproduce} runs the suite end to end from a clean tree.
 

@@ -8,7 +8,7 @@ import time
 from _common import banner, provenance, save
 
 ORDER = ("e1_main", "e2_ablation", "e3_costs", "e4_transfer", "e5_shield",
-         "e6_worked_example", "e6_premature")
+         "e6_worked_example", "e6_premature", "e7_escalation")
 
 
 def main() -> None:

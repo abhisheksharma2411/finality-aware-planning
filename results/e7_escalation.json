@@ -1,0 +1,164 @@
+{
+ "provenance": {
+  "version": "1.0.0",
+  "git_commit": "3d2a81e56da3690310e3a0be1d574f49d548bebe",
+  "git_dirty": "yes",
+  "command": "experiments/e7_escalation.py",
+  "python": "3.14.7",
+  "generated_at": "2026-09-16T01:43:14+00:00",
+  "finalitybench_version": "1.0.0",
+  "finalitybench_location": "sibling checkout",
+  "finalitybench_git": "0b01661"
+ },
+ "config": {
+  "n_tasks": 320,
+  "seeds": [
+   0,
+   1,
+   2,
+   3,
+   4
+  ],
+  "capabilities": [
+   0.0,
+   0.1,
+   0.2,
+   0.3,
+   0.4,
+   0.5,
+   0.6,
+   0.7,
+   0.8,
+   0.9,
+   1.0
+  ],
+  "policies": [
+   "planner",
+   "transactional"
+  ]
+ },
+ "rows": [
+  {
+   "retry_success": 0.0,
+   "mean_excess": {
+    "planner": 2863.233644859813,
+    "transactional": 3137.196261682243
+   },
+   "gap": 273.96261682242994,
+   "planner_ahead": true
+  },
+  {
+   "retry_success": 0.1,
+   "mean_excess": {
+    "planner": 2863.233644859813,
+    "transactional": 3118.7414330218066
+   },
+   "gap": 255.50778816199363,
+   "planner_ahead": true
+  },
+  {
+   "retry_success": 0.2,
+   "mean_excess": {
+    "planner": 2863.233644859813,
+    "transactional": 3100.286604361371
+   },
+   "gap": 237.05295950155778,
+   "planner_ahead": true
+  },
+  {
+   "retry_success": 0.3,
+   "mean_excess": {
+    "planner": 2863.233644859813,
+    "transactional": 3081.8317757009345
+   },
+   "gap": 218.59813084112147,
+   "planner_ahead": true
+  },
+  {
+   "retry_success": 0.4,
+   "mean_excess": {
+    "planner": 2863.233644859813,
+    "transactional": 3063.3769470404986
+   },
+   "gap": 200.14330218068562,
+   "planner_ahead": true
+  },
+  {
+   "retry_success": 0.5,
+   "mean_excess": {
+    "planner": 2863.233644859813,
+    "transactional": 3044.9221183800623
+   },
+   "gap": 181.68847352024932,
+   "planner_ahead": true
+  },
+  {
+   "retry_success": 0.6,
+   "mean_excess": {
+    "planner": 2863.233644859813,
+    "transactional": 3026.467289719626
+   },
+   "gap": 163.233644859813,
+   "planner_ahead": true
+  },
+  {
+   "retry_success": 0.7,
+   "mean_excess": {
+    "planner": 2863.233644859813,
+    "transactional": 3008.01246105919
+   },
+   "gap": 144.77881619937716,
+   "planner_ahead": true
+  },
+  {
+   "retry_success": 0.8,
+   "mean_excess": {
+    "planner": 2863.233644859813,
+    "transactional": 2989.557632398754
+   },
+   "gap": 126.32398753894086,
+   "planner_ahead": true
+  },
+  {
+   "retry_success": 0.9,
+   "mean_excess": {
+    "planner": 2863.233644859813,
+    "transactional": 2971.1028037383176
+   },
+   "gap": 107.86915887850455,
+   "planner_ahead": true
+  },
+  {
+   "retry_success": 1.0,
+   "mean_excess": {
+    "planner": 2863.233644859813,
+    "transactional": 2952.6479750778817
+   },
+   "gap": 89.4143302180687,
+   "planner_ahead": true
+  }
+ ],
+ "headline": {
+  "baseline_gap_cents": 273.96261682242994,
+  "gap_at_full_capability_cents": 89.4143302180687,
+  "planner_ahead_at": [
+   0.0,
+   0.1,
+   0.2,
+   0.3,
+   0.4,
+   0.5,
+   0.6,
+   0.7,
+   0.8,
+   0.9,
+   1.0
+  ],
+  "planner_behind_at": [],
+  "break_even_retry_success": null,
+  "gate_escalations": 47,
+  "escalations_a_retry_could_rescue": 7,
+  "share_rescuable": 0.14893617021276595,
+  "note": "retry_success = 0 is FinalityBench's own analyst and reproduces the published gap; the sweep asks how capable a human has to be before escalating unconditionally wins"
+ }
+}

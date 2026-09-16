@@ -233,3 +233,49 @@ def test_the_premature_flag_does_not_see_a_replacement():
                       seeds=(0,))
     assert (summarize(grades, earlier.name).premature_rate
             == summarize(grades, current.name).premature_rate)
+
+
+def test_the_benchmark_analyst_is_the_zero_row_of_the_sweep():
+    """Re-scoring at zero capability must not move any published number.
+
+    The sweep is only meaningful if its baseline is FinalityBench's own
+    grading. If adjusted_excess changed anything at retry_success = 0, every
+    row above it would be measured against a different benchmark.
+    """
+    from fap.escalation import Analyst, adjusted_excess
+    from finalitybench.faults import FaultProfile
+    from finalitybench.policies import TransactionalRuntimePolicy
+    from finalitybench.runner import evaluate
+    from finalitybench.tasks import build_corpus
+
+    corpus = build_corpus(n_tasks=80)
+    grades = evaluate([TransactionalRuntimePolicy()], corpus,
+                      profile=FaultProfile(), seeds=(0,))
+    cases = {c.task_id: c for c in corpus.cases}
+    benchmark = Analyst(retry_success=0.0)
+    for g in grades:
+        assert adjusted_excess(g, cases[g.task_id], benchmark) == float(g.excess_loss)
+
+
+def test_a_more_capable_analyst_only_helps_escalated_rescuable_cases():
+    """It must not silently improve episodes nobody escalated."""
+    from fap.escalation import Analyst, adjusted_excess
+    from finalitybench.faults import FaultProfile
+    from finalitybench.policies import TransactionalRuntimePolicy
+    from finalitybench.runner import evaluate
+    from finalitybench.tasks import build_corpus
+
+    corpus = build_corpus(n_tasks=80)
+    grades = evaluate([TransactionalRuntimePolicy()], corpus,
+                      profile=FaultProfile(), seeds=(0,))
+    cases = {c.task_id: c for c in corpus.cases}
+    perfect = Analyst(retry_success=1.0)
+    moved = 0
+    for g in grades:
+        case = cases[g.task_id]
+        adjusted = adjusted_excess(g, case, perfect)
+        if adjusted != float(g.excess_loss):
+            moved += 1
+            assert g.escalated and case.retry_succeeds
+        assert adjusted <= float(g.excess_loss)
+    assert moved > 0, "the sweep would be vacuous"
