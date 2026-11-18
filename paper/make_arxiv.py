@@ -33,7 +33,7 @@ TITLE = ("Deciding Under Uncertain Payment Finality: "
          "A Decision Rule That Prices Its Options")
 AUTHORS = "Abhishek Sharma"
 PRIMARY_CLASS = "cs.AI"
-CROSS_LIST = "cs.SE, cs.LG"
+CROSS_LIST = "cs.SE"
 ACM_CLASS = "I.2.8; I.2.11; J.1"
 REPO_URL = "https://github.com/abhisheksharma2411/finality-aware-planning"
 

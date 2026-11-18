@@ -30,9 +30,11 @@ We replace the fixed rule with an expected-value comparison under a belief
 fitted from the benchmark's public split. It is a deadline decision rule, not a
 general sequential planner: a conditional probability and one comparison of
 four closed-form expressions, with no search over action sequences. Over
-\nTasks{} tasks and \nGrades{} graded episodes it is exactly correct on
-\planExact\%\ against the gate's \gateExact\%, and on a paired resample it
-reduces the mean position gap by \$\vsGateReduction{} per episode.
+\nTasks{} tasks under \nSeeds{} fault schedules --- \nRuleEpisodes{} episodes
+of the rule, and \nGrades{} graded across all \nPolicies{} policies compared
+--- it is exactly correct on \planExact\%\ against the gate's \gateExact\%,
+and on a paired resample it reduces the mean position gap by
+\$\vsGateReduction{} per episode.
 
 The margin turns on what escalation is worth, not only on what it costs.
 FinalityBench's analyst starts no new money movement, so escalation cannot
@@ -149,6 +151,16 @@ Mansoor et al.~\cite{verifiedtools}, plus the finality gate the benchmark adds.
 It is a strong baseline rather than a straw one, and the margin over it is
 correspondingly small.
 
+\textbf{Accounting after the agent stops.} Nandi et
+al.~\cite{trustbound} ask what a payment service can still guarantee once an
+agent has stopped while its operations remain executable. Their Lean
+development proves that an admission fence fixes a journal covering every
+effect and outstanding right, and that discharging those rights prevents
+further effects: completeness of the account, and termination of payment
+authority. That is the complementary half of the problem. They make the
+reckoning exact once the outcomes are known; the decision priced here is taken
+while the outcome does not yet exist and no fence can bring it forward.
+
 \textbf{Reversibility.} Zhai et al.~\cite{revisable} classify actions by whether
 they can be undone and show that an agent's flexibility is bounded by its
 reversibility. The valuation here is one way of pricing that bound.
@@ -166,6 +178,12 @@ We reuse the released artifact rather than reimplementing it, and every result
 records the revision it ran against. The corpus is \nTasks{} tasks including
 \nPairs{} twin pairs, whose two members are indistinguishable at the decision
 instant and whose eventual correct dispositions differ.
+
+Every policy is run on every task under \nSeeds{} fault schedules, so each
+contributes \nTasks{} $\times$ \nSeeds{} $=$ \nRuleEpisodes{} episodes and the
+\nPolicies{} policies compared give \nGrades{} graded episodes in total. A rate
+reported for a single policy, the exact rate included, is over that policy's own
+\nRuleEpisodes{}, not over the \nGrades{}.
 
 \section{A belief about finality}
 \label{sec:belief}
@@ -623,6 +641,11 @@ stopping for tool acquisition in LLM agents,'' arXiv:2607.27083, Jul. 2026.
 \bibitem{verifiedtools}
 I.~K.~Mansoor, A.~Phadke, and P.~Rana, ``Verified tool calls improve LLM agent
 reliability under non-atomic failures,'' arXiv:2608.02645, Jul. 2026.
+
+\bibitem{trustbound}
+S.~Nandi, A.~Bose, A.~Bose, and S.~Bakshi, ``TrustBound: Mechanized
+completeness for payment epochs initiated by AI agents,'' arXiv:2611.19551,
+Nov. 2026.
 
 \bibitem{revisable}
 Z.~Zhai, M.~Li, and X.~Wang, ``Revisable by design: A theory of streaming LLM

@@ -139,7 +139,7 @@ def table_archetype(e1):
     rows = {r["policy"]: r for r in e1["policies"]}
     gate, plan = rows["transactional"]["by_archetype"], rows["planner"]["by_archetype"]
     keys = sorted(set(gate) & set(plan),
-                  key=lambda a: plan[a]["mean_excess"] - gate[a]["mean_excess"])
+                  key=lambda a: (plan[a]["mean_excess"] - gate[a]["mean_excess"], a))
     out = [r"\begin{tabular}{lrrr}", r"\toprule",
            r"archetype & gate (\$) & planner (\$) & difference (\$) \\", r"\midrule"]
     for a in keys:
@@ -161,6 +161,8 @@ def macros(e1, e2, e3, e4, e5, e6=None, e7=None, e8=None):
         "nPairs": e1["corpus"]["n_pairs"],
         "nSeeds": len(e1["seeds"]),
         "nGrades": f"{e1['n_grades']:,}",
+        "nPolicies": len(e1["policies"]),
+        "nRuleEpisodes": f"{p['n']:,}",
         "bootReplicates": f"{e1['bootstrap']['replicates']:,}",
         "bootUnits": p["ci"]["exact_rate"]["n_units"],
         "planExact": pct(p["exact_rate"]),
