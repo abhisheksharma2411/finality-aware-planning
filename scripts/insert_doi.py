@@ -14,6 +14,15 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+
+#: The paper promises no DOI: its artifact statement names the repository and
+#: the release, and says nothing archival, because an unkept promise in a
+#: posted preprint is worse than silence. So there is nothing to *replace* --
+#: the DOI sentence is appended after this anchor. Matched as a regex because
+#: LaTeX source is hard-wrapped, so the sentence spans a line break.
+ANCHOR_RE = re.compile(r"which\s+is\s+the\s+revision\s+this\s+paper\s+was\s+built\s+from\.")
+
+#: Older spelling, kept so this still works on an unrevised checkout.
 PLACEHOLDER = "ZENODO_DOI_PLACEHOLDER"
 
 
@@ -24,13 +33,20 @@ def main(doi: str) -> int:
 
     tex = ROOT / "paper" / "fap.tex"
     body = tex.read_text()
-    if PLACEHOLDER in body:
-        tex.write_text(body.replace(PLACEHOLDER, doi.replace("_", r"\_")))
-        print(f"  paper/fap.tex <- {doi}")
-    elif doi in body:
+    escaped = doi.replace("_", r"\_")
+    if escaped in body or doi in body:
         print("  paper already carries this DOI")
+    elif ANCHOR_RE.search(body):
+        tex.write_text(ANCHOR_RE.sub(
+            lambda m: m.group(0) + f" The release is archived at DOI \\texttt{{{escaped}}}.",
+            body, count=1))
+        print(f"  paper/fap.tex <- {doi}")
+    elif PLACEHOLDER in body:
+        tex.write_text(body.replace(PLACEHOLDER, escaped))
+        print(f"  paper/fap.tex <- {doi}")
     else:
-        print("  WARNING: no placeholder and no matching DOI in the paper")
+        print("  ERROR: no anchor, no placeholder and no matching DOI")
+        return 1
 
     cff = ROOT / "CITATION.cff"
     text = cff.read_text()

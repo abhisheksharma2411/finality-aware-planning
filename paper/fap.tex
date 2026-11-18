@@ -31,8 +31,8 @@ fitted from the benchmark's public split. It is a deadline decision rule, not a
 general sequential planner: a conditional probability and one comparison of
 four closed-form expressions, with no search over action sequences. Over
 \nTasks{} tasks and \nGrades{} graded episodes it is exactly correct on
-\planExact\%\ against the gate's \gateExact\%, and its mean position gap on a
-paired resample is \$\vsGateGap{} lower.
+\planExact\%\ against the gate's \gateExact\%, and on a paired resample it
+reduces the mean position gap by \$\vsGateReduction{} per episode.
 
 The margin turns on what escalation is worth, not only on what it costs.
 FinalityBench's analyst starts no new money movement, so escalation cannot
@@ -81,7 +81,9 @@ settles. Shipping collects the order when the capture settles and loses the cost
 of goods when it does not. Which is cheapest depends on the order value, and no
 fixed rule can track that.
 
-This paper replaces the fixed rule with a valuation. The contributions:
+This paper replaces the fixed rule with a valuation. The valuation is a
+deterministic computation at a single instant, the deadline, and not a search
+over action sequences. The contributions:
 
 \begin{itemize}
 \item \textbf{A belief over finality fitted from data}, in which an
@@ -93,8 +95,9 @@ that rather than taken from the margin (Section~\ref{sec:belief}).
 gate's behaviour everywhere the gate is right and departs from it only where
 escalation is not the best-priced option (Section~\ref{sec:planner}).
 
-\item \textbf{Evidence that the departure is worth something}: \$\vsGateGap{}
-per episode on a shared task resample, holding across \costPlannerBetter{} of
+\item \textbf{Evidence that the departure is worth something}:
+\$\vsGateReduction{} less per episode on a shared task resample, holding across
+\costPlannerBetter{} of
 \costSettings{} cost settings and on a corpus the belief was not fitted to
 (Section~\ref{sec:results}).
 
@@ -113,7 +116,15 @@ information at each turn, and find agents struggle when a task looks feasible
 until the environment says otherwise. That is the shape of the problem here.
 The difference is that abstention in their setting is a free action, while
 escalation here has a price that competes with the alternatives, and it is the
-competition that this paper is about.
+competition that this paper is about. DosSantos DiSorbo and
+Ju~\cite{actorescalate} do price it: their agent predicts, estimates its own
+chance of being right, and weighs the expected cost of acting against the cost
+of handing the case to a human. They find that language models carry
+model-specific escalation profiles and that miscalibrated ones act when they
+should defer and defer when they should act. That is a question about the
+agent; this paper asks the prior question of what the correctly priced answer
+is, computes it rather than learning it, and finds that the benchmark's fixed
+escalation rule is the thing that is miscalibrated.
 
 \textbf{Shields and runtime enforcement.} ShieldAgent~\cite{shieldagent}
 enforces safety policies over an agent's action trajectory by extracting
@@ -278,9 +289,12 @@ Table~\ref{tab:main} gives the marginal numbers and Table~\ref{tab:paired} the
 comparisons. The planner reaches \planExact\%\ exact against the gate's
 \gateExact\%. Its marginal interval, \$\planGapCI, overlaps the gate's
 \$\gateGapCI{} almost entirely, which is why the marginal numbers are not the
-evidence. On a resample that gives both policies the same tasks the difference
-is \$\vsGateGap{} in mean gap and \vsGateExact{} points of exact rate, and
-neither interval contains zero.
+evidence. On a resample that gives both policies the same tasks, the rule
+reduces the mean gap by \$\vsGateReduction{} and raises the exact rate by
+\vsGateExact{} points, and neither interval contains zero. Throughout, a
+paired contrast is reported as the magnitude of the rule's improvement with
+its interval in the same direction; the underlying signed difference is
+\$\vsGateGap{}.
 
 The margin over the gate is small in absolute terms and it should be read that
 way. Against the weaker baselines it is two orders of magnitude larger, which
@@ -384,8 +398,9 @@ from a different seed.}
 \input{tables/transfer}
 \end{table}
 
-Fitting on the public split and evaluating on the regenerated one gives
-\$\transferHidden, statistically indistinguishable from the public-split result.
+Fitting on the public split and evaluating on the regenerated one reduces the
+mean gap by \$\transferReduction, statistically indistinguishable from the
+public-split result.
 A deliberately wrong prior, one that says captures resolve early and nearly
 always settle, raises the planner's mean gap to \$\wrongPrior. The fit is doing
 work and it is not memorising the draw.
@@ -475,8 +490,9 @@ the wrong one.
 
 \section{Limitations}
 
-\textbf{The margin over the strongest baseline is small.} \$\vsGateGap{} per
-episode is a real difference with an interval that excludes zero, and it is not
+\textbf{The margin over the strongest baseline is small.} \$\vsGateReduction{}
+per episode is a real difference with an interval that excludes zero, and it is
+not
 a large one. The honest summary is that a careful planner recovers a modest
 amount from a good procedure, and a great deal from a mediocre one.
 
@@ -486,7 +502,8 @@ shield is inert is itself a result, but a reader should understand the working
 parts as the decision rule and the conditional prior.
 
 \textbf{The margin depends on how an escalation is modelled, not only on what
-it costs.} Of the \$\vsGateGap{} total, \$\escalatingContribution{} comes from
+it costs.} Of the \$\vsGateReduction{} total, \$\escalatingContribution{} comes
+from
 the \texttt{\escalatingArchetype} archetype, where the gate escalates.
 FinalityBench models an escalated case as an analyst who completes the
 disposition of money already held and does not initiate new money movement.
@@ -550,9 +567,12 @@ expensive, or an online estimate.
 
 Escalating to a human is the safe answer to uncertain finality and it is not the
 best one, because it costs the same whatever is at stake. Pricing the
-alternatives instead recovers \$\vsGateGap{} per episode against the strongest
-policy the benchmark ships, holds across every cost setting we tried, and
-transfers to a corpus the belief was not fitted to. The safety shield that
+alternatives instead recovers \$\vsGateReduction{} per episode against the
+strongest policy the benchmark ships, holds across every cost setting we tried,
+and transfers to a corpus the belief was not fitted to. What does the pricing is
+a deterministic rule evaluated once, at the deadline: a conditional settle
+probability and a comparison of four closed-form expressions, with no search
+over action sequences and no language model anywhere in the loop. The safety shield that
 accompanied the planner turned out to be inert inside it, and chasing that
 produced the more useful observation: at these economics an expected-value
 shield cannot refuse a profitable gamble, and only a criterion that looks at the
@@ -561,21 +581,27 @@ branch it cannot rule out will.
 \section*{Artifact availability}
 
 Code, the fitted priors and every result file are at
-\url{https://github.com/abhisheksharma2411/finality-aware-planning}. An archival DOI is forthcoming. It consumes the released
-FinalityBench artifact~\cite{finalitybench} rather than reimplementing it.
+\url{https://github.com/abhisheksharma2411/finality-aware-planning}, MIT
+licensed, at release \texttt{v1.0.1}, which is the revision this paper was
+built from. It consumes the released FinalityBench
+artifact~\cite{finalitybench} rather than reimplementing it.
 \texttt{make reproduce} runs the suite end to end from a clean tree.
 
 \begin{thebibliography}{9}
 
 \bibitem{finalitybench}
 A.~Sharma, ``FinalityBench: An effect-level benchmark for agent decisions under
-delayed and conflicting financial finality,'' software artifact and manuscript,
-2026, \textsc{doi}: 10.5281/zenodo.22262591.
+delayed and conflicting financial finality,'' arXiv:2609.04706, 2026,
+\textsc{doi}: 10.5281/zenodo.22262591.
 
 \bibitem{causalloss}
-A.~Sharma, ``CausalLoss-Fin: Splitting financial agent loss between decisions
-and infrastructure faults,'' software artifact and manuscript, 2026.
-\url{https://github.com/abhisheksharma2411/causalloss-fin}
+A.~Sharma, ``CausalLoss-Fin: Attributing financial-agent loss to decisions and
+infrastructure faults,'' arXiv:2609.25960, 2026,
+\textsc{doi}: 10.5281/zenodo.22893020.
+
+\bibitem{actorescalate}
+M.~DosSantos DiSorbo and H.~Ju, ``Act or escalate? Evaluating escalation
+behavior in automation with language models,'' arXiv:2604.08588, Mar. 2026.
 
 \bibitem{abstention}
 H.~Luo, B.~Wen, and L.~L.~Wang, ``Agentic abstention: Do agents know when to
@@ -587,7 +613,8 @@ safety policy reasoning,'' arXiv:2503.22738, Mar. 2025.
 
 \bibitem{voimcp}
 Z.~Laouar, Q.~H.~Ho, and Z.~Sunberg, ``Leveraging the value of information in
-POMDP planning,'' arXiv:2604.01434, Apr. 2026.
+POMDP planning,'' in \emph{Proc. ICAPS}, vol.~36, no.~1, 2026, pp. 152--160,
+\textsc{doi}: 10.1609/icaps.v36i1.42824.
 
 \bibitem{coststopping}
 Y.~Feng, Y.~Zhang, Y.~Cheng, and W.~Qi, ``Scores are not decisions: Cost-aware

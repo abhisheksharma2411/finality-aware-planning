@@ -30,6 +30,33 @@ def ci(entry, scale=0.01, p=2):
             f"[{entry['low']*scale:.{p}f}, {entry['high']*scale:.{p}f}]")
 
 
+def reduction(entry, scale=0.01, p=2):
+    """A paired difference stated as a reduction: magnitude, interval negated.
+
+    The paired contrast is (rule - baseline), so a *negative* mean gap means
+    the rule costs less. Writing that as "$-2.74 lower" is a double negative,
+    and the same quantity appeared elsewhere unsigned as 2.74, so the paper
+    had two conventions for one number. Prose now says "reduces ... by
+    $2.74 [1.80, 3.80]" and this produces exactly that string.
+
+    Negating an interval reverses it, so the bounds swap: [-3.80, -1.80]
+    becomes [1.80, 3.80].
+
+    Raises if the contrast is not a reduction. A re-run that flipped the sign
+    would otherwise silently print a "reduction" that is an increase, and the
+    surrounding sentences would need rewriting anyway.
+    """
+    pt = entry["point"] * scale
+    lo = entry["low"] * scale
+    hi = entry["high"] * scale
+    if pt >= 0:
+        raise ValueError(
+            f"reduction() called on a non-negative contrast ({pt:.{p}f}); "
+            "the rule did not reduce the gap in this run, so the prose that "
+            "calls it a reduction is now wrong and must be rewritten")
+    return f"{-pt:.{p}f} [{-hi:.{p}f}, {-lo:.{p}f}]"
+
+
 def table_main(e1):
     rows = {r["policy"]: r for r in e1["policies"]}
     out = [r"\begin{tabular}{lrrrr}", r"\toprule",
@@ -143,6 +170,7 @@ def macros(e1, e2, e3, e4, e5, e6=None, e7=None, e8=None):
         "gateGap": money(g["mean_excess"]),
         "gateGapCI": ci(g["ci"]["mean_excess"]),
         "vsGateGap": ci(vs["mean_gap"]),
+        "vsGateReduction": reduction(vs["mean_gap"]),
         "vsGateExact": ci(vs["exact_rate"], 100, 1),
         "planPassK": ci(p["ci"]["pass_all"], 100, 1),
         "gatePassK": ci(g["ci"]["pass_all"], 100, 1),
@@ -164,6 +192,9 @@ def macros(e1, e2, e3, e4, e5, e6=None, e7=None, e8=None):
         "transferHidden": ci(next(r for r in e4["rows"]
                                   if r["split"] == "hidden"
                                   and r["prior"] == "fitted on public")["difference"]),
+        "transferReduction": reduction(next(r for r in e4["rows"]
+                                            if r["split"] == "hidden"
+                                            and r["prior"] == "fitted on public")["difference"]),
         "wrongPrior": money(next(r for r in e4["rows"]
                                  if r["split"] == "hidden"
                                  and r["prior"] == "deliberately wrong")["planner"]),
