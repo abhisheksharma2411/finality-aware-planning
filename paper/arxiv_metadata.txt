@@ -1,0 +1,36 @@
+TITLE
+Deciding Under Uncertain Payment Finality: A Decision Rule That Prices Its Options
+
+AUTHORS
+Abhishek Sharma
+
+PRIMARY CLASS
+cs.AI
+
+CROSS-LIST
+cs.SE, cs.LG
+
+COMMENTS
+6 pages, 4 figures, 7 tables. Code, the fitted priors and every raw results file are at https://github.com/abhisheksharma2411/finality-aware-planning (release v1.0.1); `make reproduce` rebuilds every figure, table and number in the paper from the raw results.
+
+REPORT NUMBER
+(leave blank -- no institutional report series)
+
+JOURNAL REFERENCE
+(leave blank -- not published in a journal or proceedings)
+
+EXTERNAL DOI
+(leave blank. This field is for a DOI of THIS PAPER in a journal or
+proceedings. A Zenodo *software* DOI is not that, and putting one here asserts
+a published version that does not exist. If the artifact is archived, its DOI
+belongs in COMMENTS and in the paper's Artifact Availability section.)
+
+ACM CLASS
+I.2.8; I.2.11; J.1
+
+MSC CLASS
+(leave blank -- not a mathematics paper)
+
+UPLOAD
+paper/fap-arxiv.tar.gz -- one file. Do not upload the PDF; arXiv compiles
+the source. The abstract to paste is paper/arxiv_abstract.txt.

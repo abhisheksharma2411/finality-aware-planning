@@ -255,15 +255,15 @@ which it is not.
 \section{Results}
 \label{sec:results}
 
-\begin{table}[t]
+\begin{table*}[t]
 \centering
 \caption{Policies over \nTasks{} tasks and \nSeeds{} seeds. Brackets are 95\%
 bootstrap intervals over \bootUnits{} independent units, twin pairs resampled
 together.}
 \label{tab:main}
-\footnotesize\setlength{\tabcolsep}{3pt}
+\footnotesize\setlength{\tabcolsep}{6pt}
 \input{tables/main}
-\end{table}
+\end{table*}
 
 \begin{table}[t]
 \centering
@@ -271,7 +271,7 @@ together.}
 tasks, so the comparison should use that rather than compare two marginal
 intervals that overlap.}
 \label{tab:paired}
-\footnotesize\setlength{\tabcolsep}{4pt}
+\footnotesize\setlength{\tabcolsep}{3pt}
 \input{tables/paired}
 \end{table}
 
@@ -394,7 +394,7 @@ expensive at one setting; it is that a fixed rule cannot notice when it is.
 \caption{The prior fitted on the public split, applied to a corpus regenerated
 from a different seed.}
 \label{tab:transfer}
-\footnotesize\setlength{\tabcolsep}{4pt}
+\footnotesize\setlength{\tabcolsep}{2pt}
 \input{tables/transfer}
 \end{table}
 
@@ -522,8 +522,8 @@ Every graded episode is re-scored under an analyst of a stated capability,
 computed after the fact from the log and the case's own retry flag, so the
 benchmark is not modified and its published numbers are the \texttt{retry}
 $=0$ row. Table~\ref{tab:escalation} gives the sweep. The gap falls from
-\$\escBaselineGap{} to \$\escFullGap{} as the analyst goes from never re-
-attempting to always succeeding where a retry could work, which is
+\$\escBaselineGap{} to \$\escFullGap{} as the analyst goes from never
+re-attempting to always succeeding where a retry could work, which is
 \escShrink\% of the margin. It does not change sign at any capability.
 
 So both halves of the concern are answered and only one of them favours us.
@@ -592,12 +592,12 @@ artifact~\cite{finalitybench} rather than reimplementing it.
 \bibitem{finalitybench}
 A.~Sharma, ``FinalityBench: An effect-level benchmark for agent decisions under
 delayed and conflicting financial finality,'' arXiv:2609.04706, 2026,
-\textsc{doi}: 10.5281/zenodo.22262591.
+\textsc{doi}: \mbox{10.5281/zenodo.22262591}.
 
 \bibitem{causalloss}
 A.~Sharma, ``CausalLoss-Fin: Attributing financial-agent loss to decisions and
 infrastructure faults,'' arXiv:2609.25960, 2026,
-\textsc{doi}: 10.5281/zenodo.22893020.
+\textsc{doi}: \mbox{10.5281/zenodo.22893020}.
 
 \bibitem{actorescalate}
 M.~DosSantos DiSorbo and H.~Ju, ``Act or escalate? Evaluating escalation
@@ -614,7 +614,7 @@ safety policy reasoning,'' arXiv:2503.22738, Mar. 2025.
 \bibitem{voimcp}
 Z.~Laouar, Q.~H.~Ho, and Z.~Sunberg, ``Leveraging the value of information in
 POMDP planning,'' in \emph{Proc. ICAPS}, vol.~36, no.~1, 2026, pp. 152--160,
-\textsc{doi}: 10.1609/icaps.v36i1.42824.
+\textsc{doi}: \mbox{10.1609/icaps.v36i1.42824}.
 
 \bibitem{coststopping}
 Y.~Feng, Y.~Zhang, Y.~Cheng, and W.~Qi, ``Scores are not decisions: Cost-aware
