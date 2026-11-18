@@ -22,7 +22,23 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 P1_REPO = "https://github.com/abhisheksharma2411/finalitybench.git"
-P1_VERSION = "1.0.0"
+
+#: The exact FinalityBench revision these results were computed against.
+#:
+#: Not a tag. ``make setup`` used to clone tag v1.0.0, and this paper imports
+#: ``finalitybench.bootstrap`` -- the module every confidence interval comes
+#: from -- which exists in NEITHER v1.0.0 nor v1.0.1; it was added to P1's main
+#: afterwards. So a clean machine cloned a release that cannot satisfy the
+#: import, and `make reproduce` only ever worked where an unreleased sibling
+#: checkout happened to be lying around. Pinning the commit is what makes the
+#: artifact statement true: it is immutable, public, and is exactly the
+#: revision recorded in every results file's provenance.
+P1_REVISION = "0b016616808b164df273f30f4d033c06690f9627"
+
+#: Imported by this paper and absent from P1's releases. Checked explicitly so
+#: a wrong checkout fails here, naming the cause, instead of as a
+#: ModuleNotFoundError from inside an experiment.
+P1_REQUIRED_MODULES = ("bootstrap", "runner", "policies", "tasks", "env")
 
 _CANDIDATES = (
     ROOT.parent / "finalitybench" / "src",
@@ -40,6 +56,7 @@ def ensure_p1() -> Path:
 
     for candidate in _CANDIDATES:
         if (candidate / "finalitybench" / "__init__.py").exists():
+            _require_modules(candidate)
             sys.path.insert(0, str(candidate))
             return candidate
 
@@ -51,16 +68,38 @@ def ensure_p1() -> Path:
     )
 
 
+def _require_modules(src_root: Path) -> None:
+    """Fail with the reason, not with a puzzling ImportError later."""
+    missing = [m for m in P1_REQUIRED_MODULES
+               if not (src_root / "finalitybench" / f"{m}.py").exists()]
+    if missing:
+        raise ImportError(
+            f"the FinalityBench checkout at {src_root} is missing "
+            f"{', '.join('finalitybench.' + m for m in missing)}. "
+            f"This paper needs revision {P1_REVISION[:7]}; P1's tagged releases "
+            "do not carry every module it imports. Remove the checkout and let "
+            "`make setup` fetch the pinned revision."
+        )
+
+
 def clone_p1(dest: Path | None = None) -> Path:
-    """Clone P1 at its released tag.  Used by ``make setup``."""
+    """Clone P1 at the pinned revision.  Used by ``make setup``."""
     dest = dest or (ROOT / "vendor" / "finalitybench")
     if dest.exists():
         return dest
     dest.parent.mkdir(parents=True, exist_ok=True)
+    subprocess.run(["git", "init", "--quiet", str(dest)], check=True)
+    subprocess.run(["git", "-C", str(dest), "remote", "add", "origin", P1_REPO],
+                   check=True)
+    # Fetching one commit keeps this as cheap as the old --depth 1 clone.
     subprocess.run(
-        ["git", "clone", "--depth", "1", "--branch", f"v{P1_VERSION}", P1_REPO, str(dest)],
+        ["git", "-C", str(dest), "fetch", "--quiet", "--depth", "1",
+         "origin", P1_REVISION],
         check=True,
     )
+    subprocess.run(["git", "-C", str(dest), "checkout", "--quiet", "FETCH_HEAD"],
+                   check=True)
+    _require_modules(dest / "src")
     return dest
 
 

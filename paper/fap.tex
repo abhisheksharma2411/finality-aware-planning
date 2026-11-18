@@ -601,8 +601,10 @@ branch it cannot rule out will.
 Code, the fitted priors and every result file are at
 \url{https://github.com/abhisheksharma2411/finality-aware-planning}, MIT
 licensed, at release \texttt{v1.0.1}, which is the revision this paper was
-built from. It consumes the released FinalityBench
-artifact~\cite{finalitybench} rather than reimplementing it.
+built from. It consumes FinalityBench~\cite{finalitybench} at
+revision \texttt{0b01661}, which \texttt{make setup} fetches, rather than
+reimplementing it; that revision carries a module this paper imports which
+P1's tagged releases do not.
 \texttt{make reproduce} runs the suite end to end from a clean tree.
 
 \begin{thebibliography}{9}
