@@ -8,7 +8,7 @@ PRIMARY CLASS
 cs.AI
 
 CROSS-LIST
-cs.SE, cs.LG
+cs.SE
 
 COMMENTS
 6 pages, 4 figures, 7 tables. Code, the fitted priors and every raw results file are at https://github.com/abhisheksharma2411/finality-aware-planning (release v1.0.1); `make reproduce` rebuilds every figure, table and number in the paper from the raw results.
