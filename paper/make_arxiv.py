@@ -37,6 +37,13 @@ CROSS_LIST = "cs.SE"
 ACM_CLASS = "I.2.8; I.2.11; J.1"
 REPO_URL = "https://github.com/abhisheksharma2411/finality-aware-planning"
 
+#: Zenodo's *concept* DOI, which always resolves to the newest version. The
+#: v1.0.1 version DOI is 10.5281/zenodo.24406795; cite the concept one so the
+#: reference does not go stale. This belongs in COMMENTS and in the paper's
+#: artifact section -- never in arXiv's External DOI field, which asserts a
+#: published journal version of THIS PAPER that does not exist.
+ZENODO_CONCEPT_DOI = "10.5281/zenodo.24406794"
+
 
 def release_tag() -> str:
     """The tag named by CITATION.cff, cross-checked against the paper.
@@ -88,8 +95,9 @@ def metadata(pdf: Path, tag: str) -> str:
     comments = (
         f"{c['pages']} pages, {c['figures']} figures, {c['tables']} tables. "
         f"Code, the fitted priors and every raw results file are at {REPO_URL} "
-        f"(release {tag}); `make reproduce` rebuilds every figure, table and "
-        f"number in the paper from the raw results."
+        f"(release {tag}), archived on Zenodo at DOI {ZENODO_CONCEPT_DOI}; "
+        f"`make reproduce` rebuilds every figure, table and number in the "
+        f"paper from the raw results."
     )
     return f"""TITLE
 {TITLE}
