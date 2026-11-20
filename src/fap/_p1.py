@@ -135,4 +135,17 @@ def p1_provenance() -> dict[str, str]:
     }
 
 
-ensure_p1()
+def ensure_or_clone() -> Path:
+    """Resolve P1, fetching the pinned revision if it is not here yet.
+
+    This is what ``make setup`` calls. It exists because importing this module
+    must NOT resolve P1: setup has to be able to import ``clone_p1`` *before*
+    P1 exists, and a module-level ``ensure_p1()`` made that impossible. A
+    fresh clone of v1.0.1 failed with "FinalityBench (P1) not found" while
+    trying to import the very function that would have fetched it.
+    """
+    try:
+        return ensure_p1()
+    except ImportError:
+        clone_p1()
+        return ensure_p1()

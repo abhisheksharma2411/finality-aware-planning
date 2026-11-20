@@ -23,14 +23,16 @@ $(PY):
 
 # This paper is a causal layer over FinalityBench and does not reimplement it.
 # A sibling checkout is used when present; otherwise the released tag is cloned.
+# ensure_or_clone() prefers an installed package, then a sibling checkout,
+# then vendor/, and fetches the pinned revision if none of those is here.
+# stderr is NOT silenced: the old target hid its own ImportError behind
+# `2>/dev/null ||` and fell through to a fallback that failed the same way,
+# so a fresh clone reported nothing useful.
 p1:
 	@$(PY) -c "import sys; sys.path.insert(0,'src'); \
-	from fap._p1 import ensure_p1, clone_p1, p1_provenance; \
-	import pathlib; \
-	(ensure_p1() if any((pathlib.Path('../finalitybench/src')/'finalitybench').glob('__init__.py')) else clone_p1()); \
-	print('finalitybench:', p1_provenance())" 2>/dev/null || \
-	$(PY) -c "import sys; sys.path.insert(0,'src'); \
-	from fap._p1 import clone_p1; print('cloned to', clone_p1())"
+	from fap._p1 import ensure_or_clone, p1_provenance; \
+	ensure_or_clone(); \
+	print('finalitybench:', p1_provenance())"
 
 test: setup
 	$(PY) -m pytest

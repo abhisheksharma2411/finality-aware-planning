@@ -94,4 +94,6 @@ guarded._shield.criterion = "downside"          # or "expected"
 - [PEER_REVIEW.md](PEER_REVIEW.md) — adversarial review and its resolution
 - [REVIEW.md](REVIEW.md) — claim-to-evidence matrix
 
-MIT licensed. Consumes FinalityBench v1.0.1.
+MIT licensed. Consumes FinalityBench at revision `0b01661`, which
+`make setup` fetches; P1's tagged releases do not carry every module this
+paper imports.

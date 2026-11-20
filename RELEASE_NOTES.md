@@ -1,4 +1,4 @@
-# Finality-Aware Planning v1.0.1
+# Finality-Aware Planning v1.0.2
 
 A deadline decision rule for the choice FinalityBench poses: what to do when a
 payment capture will not resolve before the order ships. It is not a sequential
@@ -24,7 +24,27 @@ makes the result depend on how the benchmark models an escalated case; the
 escalation sweep measures that and the margin survives it, shrinking from
 $2.74 to $0.89 without changing sign.
 
-## Changes since v1.0.0
+## Changes since v1.0.1
+
+- **`make setup` works on a machine that has never seen FinalityBench.** v1.0.1
+  called `ensure_p1()` at the bottom of `fap/_p1.py`, so importing that module
+  resolved P1 as a side effect. `make setup` imports `clone_p1` from it -- the
+  function whose entire job is to fetch P1 -- so a fresh clone died with
+  `ImportError: FinalityBench (P1) not found` while importing the thing that
+  would have fetched it. The Makefile hid the traceback behind `2>/dev/null`
+  and fell through to a fallback that failed the same way, so the error said
+  nothing useful. Resolution now happens in `ensure_or_clone()`, which setup
+  calls explicitly; the runtime modules that genuinely need P1 keep their own
+  `ensure_p1()` calls.
+- Added `tests/test_setup_isolation.py`, which runs setup under a copied source
+  tree in a temp directory with no sibling checkout, no installed package and
+  no `vendor/finalitybench`, and includes a control asserting the isolation is
+  real so the regression test cannot pass vacuously.
+- The artifact statement carries the archival DOI, `10.5281/zenodo.24406794`.
+- README no longer claims the paper consumes FinalityBench v1.0.1; it names the
+  revision, as RELEASE_NOTES already did.
+
+## Changes in v1.0.1
 
 - **`make setup` now fetches the FinalityBench revision these results were
   actually computed against** (`0b01661`), instead of cloning tag v1.0.0. This
